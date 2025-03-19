@@ -69,3 +69,4 @@ deploy-master:
     TAG: master
   only:
     - master
+    
