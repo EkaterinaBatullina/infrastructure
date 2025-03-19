@@ -51,5 +51,24 @@ services:
       - "80:80"
       - "443:443"
 
+  agona-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: agona-05
+    environment:
+      - VIRTUAL_HOST=app.example.com
+      - VIRTUAL_PORT=8080
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    volumes:
+      - .:/app
+
 volumes:
   portainer_data:
+
+networks:
+  app-network:
+    driver: bridge
