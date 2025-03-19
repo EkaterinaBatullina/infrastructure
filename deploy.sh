@@ -21,6 +21,10 @@ ssh "$SSH" "git clone git@gitlab.com:batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
 
+ssh "$SSH" "mkdir -p ~/batullina-agona-2024/Agona-05/target"
+
+scp "$SSH:~/batullina-agona-2024/Agona-05/target/Agona-05-1.0-SNAPSHOT.jar" .
+
 ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024:$TAG"
 
 ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/Agona-05/docker/docker-compose.$TAG.yml down"
