@@ -20,11 +20,11 @@ build-develop:
   only:
     - develop
 
-build-master:
-  environment: master
+build-main:
+  environment: main
   extends: .build
   only:
-    - master
+    - main
 
 publish-image:
   stage: publish-image
@@ -42,7 +42,7 @@ publish-image:
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
   only:
     - develop
-    - master
+    - main
 
 .deploy:
   image: docker:19.03.8-dind
@@ -60,12 +60,12 @@ deploy-develop:
   only:
     - develop
 
-deploy-master:
-  environment: master
+deploy-main:
+  environment: main
   extends: .deploy
   variables:
-    BRANCH: master
-    SSH: master
-    TAG: master
+    BRANCH: main
+    SSH: main
+    TAG: main
   only:
-    - master
+    - main
