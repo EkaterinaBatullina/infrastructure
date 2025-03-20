@@ -97,6 +97,8 @@ publish-image:
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
     - mkdir -p ./app
     - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
+    - echo "Содержимое папки app после копирования:"
+    - ls -l ./app
   artifacts:
     paths:
       - ./app
