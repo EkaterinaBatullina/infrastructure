@@ -64,6 +64,7 @@ publish-image:
     entrypoint: [ '' ]
   before_script:
     - mkdir -p /root/.ssh
+    - echo "Длина переменной SSH_PRIVATE_KEY: ${#SSH_PRIVATE_KEY}"
     - printf "%s" "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
     - chmod 600 /root/.ssh/id_rsa_vm
     - echo "Проверка прав доступа к ключу..."
