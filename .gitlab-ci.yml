@@ -70,8 +70,6 @@ publish-image:
     - ls -l /root/.ssh/id_rsa_vm
     - echo "Проверка содержимого ключа..."
     - cat /root/.ssh/id_rsa_vm
-    - echo "Преобразование ключа в формат PEM..."
-    - ssh-keygen -p -f /root/.ssh/id_rsa_vm -m PEM
     - echo "Проверка загрузки ключа..."
     - ssh-keygen -y -f /root/.ssh/id_rsa_vm
     - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
