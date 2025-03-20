@@ -1,4 +1,5 @@
 stages:
+  - .pre
   - build
   - publish-image
   - deploy
@@ -44,10 +45,22 @@ build-main:
 #    - develop
 #    - main
 
+build-kaniko-image:
+  stage: .pre
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build -f Dockerfile -t $CI_REGISTRY_IMAGE/kaniko-with-git .
+    - docker push $CI_REGISTRY_IMAGE/kaniko-with-git
+  before_script:
+    - docker info
+
 publish-image:
   stage: publish-image
   image:
-    name: gcr.io/kaniko-project/executor:debug
+    name: $CI_REGISTRY_IMAGE/kaniko-with-git
     entrypoint: [ '' ]
   script:
     - apt-get update && apt-get install -y git
