@@ -79,7 +79,7 @@ publish-image:
     - ssh -T -i /root/.ssh/id_rsa_vm git@gitlab.com
   script:
     - apk update && apk add git
-    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone git@gitlab.com:batullina-agona-2024.git
+    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
     - cd batullina-agona-2024/Agona-05
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "gitlab-ci-token" "${CI_JOB_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
