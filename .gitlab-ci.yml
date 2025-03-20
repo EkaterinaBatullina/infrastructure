@@ -62,12 +62,12 @@ publish-image:
   image:
     name: $CI_REGISTRY_IMAGE/kaniko-with-git
     entrypoint: [ '' ]
-    before_script:
-      - |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+  before_script:
+    - |
+      mkdir -p ~/.ssh
+      echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+      chmod 600 ~/.ssh/id_rsa
+      ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
   script:
     - apt-get update && apt-get install -y git
     - git clone git@gitlab.com:batullina-agona-2024.git
