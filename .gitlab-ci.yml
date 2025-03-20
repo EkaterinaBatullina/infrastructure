@@ -65,8 +65,8 @@ publish-image:
   before_script:
     - |
       mkdir -p ~/.ssh
-      echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_vm
-      chmod 600 ~/.ssh/id_rsa_vm
+      echo "$SSH_DEPLOY" > ~/.ssh/id_rsa_vm.pub
+      chmod 600 ~/.ssh/id_rsa_vm.pub
       ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
   script:
     - apt-get update && apt-get install -y git
