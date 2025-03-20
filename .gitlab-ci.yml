@@ -111,7 +111,9 @@ publish-image:
     - publish-image
     - build-develop
   script:
-    - cp ./app/Agona-05-1.0-SNAPSHOT.jar ./app/
+    - echo "Содержимое директории апп перед сборкой:"
+    - ls -l ./app/
+#    - cp ./app/Agona-05-1.0-SNAPSHOT.jar ./app/
     - ./deploy.sh
 
 deploy-develop:
