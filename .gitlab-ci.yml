@@ -64,7 +64,7 @@ publish-image:
     entrypoint: [ '' ]
   before_script:
     - mkdir -p /root/.ssh
-    - echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
+    - printf "%s" "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
     - chmod 600 /root/.ssh/id_rsa_vm
     - echo "Проверка прав доступа к ключу..."
     - ls -l /root/.ssh/id_rsa_vm
