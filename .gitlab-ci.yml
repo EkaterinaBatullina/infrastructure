@@ -95,7 +95,7 @@ publish-image:
       --context .  
       --dockerfile Dockerfile
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
-#    - mkdir -p ./app
+    - mkdir -p ./app
     - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
   artifacts:
     paths:
