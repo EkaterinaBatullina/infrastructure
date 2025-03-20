@@ -50,7 +50,7 @@ publish-image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ '' ]
   script:
-    - apk update && apk add git
+    - apt-get update && apt-get install -y git
     - git clone git@gitlab.com:batullina-agona-2024.git
     - cd batullina-agona-2024/Agona-05
     - mkdir -p /kaniko/.docker
