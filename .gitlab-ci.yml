@@ -64,9 +64,16 @@ publish-image:
     entrypoint: [ '' ]
   before_script:
     - |
+      echo "Проверка установленных пакетов..."
+      ssh -V
+      git --version
+      echo "Проверка наличия libcrypto..."
+      ldd $(which ssh) | grep libcrypto
       mkdir -p ~/.ssh
       echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_vm
       chmod 600 ~/.ssh/id_rsa_vm
+      echo "Проверка загрузки ключа..."
+      ssh-keygen -lf ~/.ssh/id_rsa_vm
       ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
       echo "Проверка SSH-подключения..."
       ssh -T -i ~/.ssh/id_rsa_vm git@gitlab.com
