@@ -71,6 +71,7 @@ publish-image:
     - echo "Проверка содержимого ключа..."
     - cat /root/.ssh/id_rsa_vm
     - echo "Преобразование ключа в формат PEM..."
+    - cat /root/.ssh/id_rsa_vm
     - ssh-keygen -p -f /root/.ssh/id_rsa_vm -m PEM
     - echo "Проверка загрузки ключа..."
     - ssh-keygen -y -f /root/.ssh/id_rsa_vm
