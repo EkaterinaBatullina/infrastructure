@@ -87,6 +87,8 @@ publish-image:
     - ls -l
     - echo "Содержимое директории таргет перед сборкой:"
     - ls -l target
+    - echo "Содержимое конфигурации Kaniko:"
+    - cat /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --cache=true
