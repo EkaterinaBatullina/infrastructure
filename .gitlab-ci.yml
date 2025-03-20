@@ -66,17 +66,6 @@ publish-image:
     - mkdir -p /root/.ssh
     - printf "%s" "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
     - chmod 600 /root/.ssh/id_rsa_vm
-#      Создание директории .ssh в домашней директории пользователя eka_rina16
-#    - mkdir -p ~/.ssh
-#    - printf "%s" "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_vm
-#    - chmod 600 ~/.ssh/id_rsa_vm
-#    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-#    - echo "Проверка прав доступа к ключу..."
-#    - ls -l /.ssh/id_rsa_vm
-#    - echo "Проверка содержимого ключа..."
-#    - cat /.ssh/id_rsa_vm
-#    - echo "Проверка загрузки ключа..."
-#    - ssh-keygen -y -f /.ssh/id_rsa_vm
     - echo "Проверка прав доступа к ключу..."
     - ls -l /root/.ssh/id_rsa_vm
     - echo "Проверка содержимого ключа..."
@@ -86,7 +75,6 @@ publish-image:
     - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
     - echo "Проверка SSH-подключения..."
     - ssh -T -i /root/.ssh/id_rsa_vm git@gitlab.com
-#    - ssh -T -i /.ssh/id_rsa_vm git@gitlab.com
   script:
     - apk update && apk add git maven
     - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
