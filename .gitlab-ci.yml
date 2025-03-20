@@ -115,7 +115,7 @@ publish-image:
   script:
     - echo "Содержимое директории апп перед сборкой:"
     - ls -l batullina-agona-2024/Agona-05/app
-    #    - cp ./app/Agona-05-1.0-SNAPSHOT.jar ./app/
+    - chmod +x ./deploy.sh
     - ./deploy.sh
 
 deploy-develop:
