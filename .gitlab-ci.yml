@@ -68,7 +68,7 @@ publish-image:
   image: docker:19.03.8-dind
   stage: deploy
   dependencies:
-    - build
+    - build-develop
   script:
     - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
     - ./deploy.sh
