@@ -86,8 +86,8 @@ publish-image:
     - >-
       /kaniko/executor
       --cache=true
-      --context batullina-agona-2024/Agona-05
-      --dockerfile Dockerfile 
+      --context ..  
+      --dockerfile Agona-05/Dockerfile
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
   only:
     - develop
