@@ -78,7 +78,7 @@ publish-image:
   script:
     - apk update && apk add git
 #    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
-    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
+    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
     - ls -l batullina-agona-2024
     - cd batullina-agona-2024/Agona-05
     - mkdir -p /kaniko/.docker
