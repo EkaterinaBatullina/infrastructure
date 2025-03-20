@@ -69,14 +69,14 @@ publish-image:
       git --version
       echo "Проверка наличия libcrypto..."
       ldd $(which ssh) | grep libcrypto
-      mkdir -p ~/.ssh
-      echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa_vm
-      chmod 600 ~/.ssh/id_rsa_vm
+      mkdir -p /root/.ssh
+      echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
+      chmod 600 /root/.ssh/id_rsa_vm
       echo "Проверка загрузки ключа..."
-      ssh-keygen -lf ~/.ssh/id_rsa_vm
-      ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+      ssh-keygen -lf /root/.ssh/id_rsa_vm
+      ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
       echo "Проверка SSH-подключения..."
-      ssh -T -i ~/.ssh/id_rsa_vm git@gitlab.com
+      ssh -T -i /root/.ssh/id_rsa_vm git@gitlab.com
   script:
     - apk update && apk add git
     - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone git@gitlab.com:batullina-agona-2024.git
