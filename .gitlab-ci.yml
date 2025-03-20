@@ -101,7 +101,7 @@ publish-image:
     - ls -l ./app
   artifacts:
     paths:
-      - ./app
+      - batullina-agona-2024/Agona-05/app
   only:
     - develop
     - main
