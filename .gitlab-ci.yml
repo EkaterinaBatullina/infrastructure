@@ -99,7 +99,7 @@ publish-image:
     - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
   artifacts:
     paths:
-       ./app
+      - ./app
   only:
     - develop
     - main
