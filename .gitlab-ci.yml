@@ -68,7 +68,8 @@ publish-image:
       echo "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
       chmod 600 /root/.ssh/id_rsa_vm
       echo "Проверка загрузки ключа..."
-      ssh-keygen -y -f ~/.ssh/id_rsa_vm
+      cat /root/.ssh/id_rsa_vm 
+      ssh-keygen -y -f /root/.ssh/id_rsa_vm 
       ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
       echo "Проверка SSH-подключения..."
       ssh -T -i /root/.ssh/id_rsa_vm git@gitlab.com
