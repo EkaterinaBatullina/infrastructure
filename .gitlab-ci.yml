@@ -95,6 +95,11 @@ publish-image:
       --context .  
       --dockerfile Dockerfile
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+#    - mkdir -p ./app
+    - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
+  artifacts:
+    paths:
+       ./app
   only:
     - develop
     - main
@@ -103,9 +108,10 @@ publish-image:
   image: docker:19.03.8-dind
   stage: deploy
   dependencies:
+    - publish-image
     - build-develop
   script:
-    - cp batullina-agona-2024/Agona-05/target/Agona-05-1.0-SNAPSHOT.jar ./app/
+    - cp ./app/Agona-05-1.0-SNAPSHOT.jar ./app/
     - ./deploy.sh
 
 deploy-develop:
