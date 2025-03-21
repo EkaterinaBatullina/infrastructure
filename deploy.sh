@@ -14,8 +14,8 @@ ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 echo "Список загруженных SSH-ключей:"
 ssh-add -L
 
-echo "Подключение с подробным логированием:"
-ssh -vvv -T git@gitlab.com
+#echo "Подключение с подробным логированием:"
+#ssh -vvv -T git@gitlab.com
 
 ssh -o "StrictHostKeyChecking=no" $SSH
 
@@ -28,9 +28,12 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 #ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+echo "Добавление ключа в ssh-agent на удалённом сервере..."
+ssh "$SSH" "ssh-add /home/eka_rina16/.ssh/id_rsa_vm"
 
-ssh-agent bash -c 'echo "Starting ssh-add..." && ssh-add /home/eka_rina16/.ssh/id_rsa_vm && echo "ssh-add done." && git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git'
-
+# Шаг 3: Клонирование репозитория на удалённом сервере
+echo "Клонирование репозитория на удалённом сервере..."
+ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
