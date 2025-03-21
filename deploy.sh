@@ -29,7 +29,7 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
-ssh-agent bash -c "ssh-add ~/.ssh/id_rsa_vm && git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh-agent bash -c "echo 'Starting ssh-add...' && ssh-add /home/eka_rina16/.ssh/id_rsa_vm && echo 'ssh-add done.' && git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
