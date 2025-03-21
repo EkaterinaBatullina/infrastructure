@@ -51,9 +51,6 @@ build-kaniko-image:
   services:
     - docker:dind
   before_script:
-    - echo "CI_REGISTRY: $CI_REGISTRY"
-    - echo "CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE"
-    - echo "CI_JOB_TOKEN: $CI_JOB_TOKEN"
     - docker info
     - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
   script:
