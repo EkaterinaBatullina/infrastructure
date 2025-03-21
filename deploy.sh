@@ -5,12 +5,29 @@ which ssh-agent || (sudo apt-get update && sudo apt-get install -y openssh-clien
 
 eval $(ssh-agent -s)
 
-echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+# Добавление приватного ключа в ssh-agent
+if [ -n "$SSH_PRIVATE_KEY" ]; then
+    echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+else
+    echo "Ошибка: SSH_PRIVATE_KEY не найден."
+    exit 1
+fi
 
+# Создание директории для SSH-ключей и конфигурации
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
-cp config ~/.ssh
+
+# Копирование конфигурации SSH (если конфиг существует)
+if [ -f config ]; then
+    cp config ~/.ssh
+else
+    echo "Ошибка: конфигурационный файл SSH не найден."
+    exit 1
+fi
 ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+
+echo "Список загруженных SSH-ключей:"
+ssh-add -L
 
 ssh -o "StrictHostKeyChecking=no" $SSH
 
@@ -22,7 +39,7 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
 #ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
 
-ssh -i ~/.ssh/id_rsa_vm "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
