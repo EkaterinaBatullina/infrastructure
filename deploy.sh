@@ -38,11 +38,11 @@ ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone -
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05"
 
-ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024/Agona-05:$TAG"
+ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024/agona-05:$TAG"
 
-ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/Agona-05/docker/docker-compose.$TAG.yml down"
+ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/agona-05/docker/docker-compose.$TAG.yml down"
 
-ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/Agona-05/docker/docker-compose.$TAG.yml up --no-build -d"
+ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/agona-05/docker/docker-compose.$TAG.yml up --no-build -d"
 
 ssh "$SSH" "sudo rm -r batullina-agona-2024/"
 
