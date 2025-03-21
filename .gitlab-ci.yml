@@ -51,17 +51,15 @@ build-kaniko-image:
   services:
     - docker:dind
   before_script:
-    - echo "CI_REGISTRY: $CI_REGISTRY" # Временный вывод переменных
-    - echo "CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE" # Временный вывод переменных
-    - echo "CI_JOB_TOKEN: $CI_JOB_TOKEN" # Временный вывод переменных
+    - echo "CI_REGISTRY: $CI_REGISTRY"
+    - echo "CI_REGISTRY_IMAGE: $CI_REGISTRY_IMAGE"
+    - echo "CI_JOB_TOKEN: $CI_JOB_TOKEN"
     - docker info
     - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - docker build -f Dockerfile -t $CI_REGISTRY_IMAGE/kaniko-with-git .
     - docker push $CI_REGISTRY_IMAGE/kaniko-with-git
-  before_script:
-    - docker info
 
 publish-image:
   stage: publish-image
