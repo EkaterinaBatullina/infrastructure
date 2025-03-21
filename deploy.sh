@@ -29,6 +29,12 @@ ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 echo "Список загруженных SSH-ключей:"
 ssh-add -L
 
+echo "Подключение:"
+ssh -T git@gitlab.com
+
+echo "Подключение с подробным логированием:"
+ssh -vvv -T git@gitlab.com
+
 ssh -o "StrictHostKeyChecking=no" $SSH
 
 #ssh "$SSH" "sudo docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
