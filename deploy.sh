@@ -27,7 +27,9 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
 #ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
 
-ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+#ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+
+ssh-agent bash -c "ssh-add ~/.ssh/id_rsa_vm && git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
