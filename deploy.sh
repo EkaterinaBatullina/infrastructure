@@ -10,18 +10,21 @@ echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 cp config ~/.ssh
+ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
 ssh -o "StrictHostKeyChecking=no" $SSH
 
-ssh "$SSH" "sudo docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
+#ssh "$SSH" "sudo docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
 
 ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
 #ssh "$SSH" "ssh-keyscan gitlab.com >> /root/.ssh/known_hosts"
 
-ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
+#ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
 
-ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh -i ~/.ssh/id_rsa_vm "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+
+#ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
 
