@@ -13,5 +13,5 @@ Host master
 Host gitlab.com
   HostName gitlab.com
   User git
-  IdentityFile ~/.ssh/id_rsa_vm
+  IdentityFile /home/eka_rina16/.ssh/id_rsa_vm
   IdentitiesOnly yes
