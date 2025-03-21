@@ -34,7 +34,7 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 ## Шаг 3: Клонирование репозитория на удалённом сервере
 #echo "Клонирование репозитория на удалённом сервере..."
 
-ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
 
