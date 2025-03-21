@@ -34,15 +34,11 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 ## Шаг 3: Клонирование репозитория на удалённом сервере
 #echo "Клонирование репозитория на удалённом сервере..."
 
-ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone -b $BRANCH git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
-ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
+ssh "$SSH" "cd batullina-agona-2024/Agona-05"
 
-ssh "$SSH" "mkdir -p ~/batullina-agona-2024/Agona-05/target"
-
-scp "$SSH:~/batullina-agona-2024/Agona-05/target/Agona-05-1.0-SNAPSHOT.jar" .
-
-ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024:$TAG"
+ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024/Agona-05:$TAG"
 
 ssh "$SSH" "sudo docker-compose -p $BRANCH -f ~/batullina-agona-2024/Agona-05/docker/docker-compose.$TAG.yml down"
 
