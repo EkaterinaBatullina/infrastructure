@@ -69,7 +69,7 @@ publish-image:
     - chmod 600 /root/.ssh/id_rsa_vm
     - echo "Проверка прав доступа к ключу..."
     - ls -l /root/.ssh/id_rsa_vm
-    - echo "Проверка содержимого ключа..."
+    - echo "Проверка содержимого ключа"
     - cat /root/.ssh/id_rsa_vm
     - echo "Проверка загрузки ключа..."
     - ssh-keygen -y -f /root/.ssh/id_rsa_vm
