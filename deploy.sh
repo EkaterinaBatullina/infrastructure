@@ -17,7 +17,9 @@ ssh "$SSH" "sudo docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
 
 ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
-ssh "$SSH" "git clone git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh "$SSH" "ssh-keyscan gitlab.com >> /root/.ssh/known_hosts"
+
+ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
 
