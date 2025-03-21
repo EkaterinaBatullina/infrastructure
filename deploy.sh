@@ -28,12 +28,14 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 #ssh "$SSH" "mkdir -p ~/.ssh && ssh-keyscan gitlab.com >> ~/.ssh/known_hosts"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
-echo "Добавление ключа в ssh-agent на удалённом сервере..."
-ssh "$SSH" "ssh-add /home/eka_rina16/.ssh/id_rsa_vm"
+#echo "Добавление ключа в ssh-agent на удалённом сервере..."
+#ssh "$SSH" "ssh-add /home/eka_rina16/.ssh/id_rsa_vm"
+#
+## Шаг 3: Клонирование репозитория на удалённом сервере
+#echo "Клонирование репозитория на удалённом сервере..."
 
-# Шаг 3: Клонирование репозитория на удалённом сервере
-echo "Клонирование репозитория на удалённом сервере..."
-ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
+ssh git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
+
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
