@@ -36,8 +36,6 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 
 ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
-#ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
-
 ssh "$SSH" "cd batullina-agona-2024/Agona-05 && git checkout $BRANCH"
 
 ssh "$SSH" "mkdir -p ~/batullina-agona-2024/Agona-05/target"
