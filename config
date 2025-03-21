@@ -9,3 +9,9 @@ Host master
     User eka_rina16
     Port 22
     StrictHostKeyChecking no
+
+Host gitlab.com
+  HostName gitlab.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_vm
+  IdentitiesOnly yes
