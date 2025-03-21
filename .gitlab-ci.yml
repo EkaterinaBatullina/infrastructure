@@ -63,7 +63,7 @@ publish-image:
     name: $CI_REGISTRY_IMAGE/kaniko-with-git
     entrypoint: [ '' ]
   before_script:
-    - echo "Создание директории .ssh для root..."
+    - echo "Создание директории .ssh для root"
     - mkdir -p /root/.ssh
     - printf "%s" "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
     - chmod 600 /root/.ssh/id_rsa_vm
