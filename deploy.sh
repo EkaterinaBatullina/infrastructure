@@ -38,6 +38,9 @@ ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone -
 
 ssh "$SSH" "cd batullina-agona-2024/Agona-05"
 
+echo "CI_JOB_TOKEN: $CI_JOB_TOKEN"
+echo "CI_REGISTRY: $CI_REGISTRY"
+
 ssh "$SSH" "sudo docker pull registry.gitlab.com/batullina-agona-2024/agona-05:$TAG"
 
 echo "CI_JOB_TOKEN: $CI_JOB_TOKEN"
