@@ -14,8 +14,8 @@ ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 echo "Список загруженных SSH-ключей:"
 ssh-add -L
 
-#echo "Подключение с подробным логированием:"
-#ssh -vvv -T git@gitlab.com
+echo "Подключение с логированием:"
+ssh -T git@gitlab.com
 
 ssh -o "StrictHostKeyChecking=no" $SSH
 
@@ -34,7 +34,7 @@ ssh "$SSH" "sudo rm -r batullina-agona-2024/ || echo 0"
 ## Шаг 3: Клонирование репозитория на удалённом сервере
 #echo "Клонирование репозитория на удалённом сервере..."
 
-ssh git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
+ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
 #ssh "$SSH" "git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git"
 
