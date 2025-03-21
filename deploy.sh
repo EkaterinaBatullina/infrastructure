@@ -4,33 +4,15 @@ set -e
 which ssh-agent || (sudo apt-get update && sudo apt-get install -y openssh-client)
 
 eval $(ssh-agent -s)
-
-# Добавление приватного ключа в ssh-agent
-if [ -n "$SSH_PRIVATE_KEY" ]; then
-    echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-else
-    echo "Ошибка: SSH_PRIVATE_KEY не найден."
-    exit 1
-fi
-
-# Создание директории для SSH-ключей и конфигурации
+echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
+cp config ~/.ssh
 
-# Копирование конфигурации SSH (если конфиг существует)
-if [ -f config ]; then
-    cp config ~/.ssh
-else
-    echo "Ошибка: конфигурационный файл SSH не найден."
-    exit 1
-fi
 ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
 echo "Список загруженных SSH-ключей:"
 ssh-add -L
-
-echo "Подключение:"
-ssh -T git@gitlab.com
 
 echo "Подключение с подробным логированием:"
 ssh -vvv -T git@gitlab.com
