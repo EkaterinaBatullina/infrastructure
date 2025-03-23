@@ -19,5 +19,4 @@ public class ApplicationConfig {
     public SecondBean secondBean() {
         return new SecondBean();
     }
-
 }
