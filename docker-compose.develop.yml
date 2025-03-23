@@ -52,7 +52,7 @@ services:
       - "443:443"
 
   agona-app:
-    image: registry.gitlab.com/agona-05:develop
+    image: registry.gitlab.com/ekaterinabatullina/infrastructure2/agona-05:develop
     container_name: agona-05
     restart: always
     environment:
@@ -60,8 +60,6 @@ services:
       - VIRTUAL_PORT=8080
     ports:
       - "8080:8080"
-    networks:
-      - app-network
 
 volumes:
   portainer_data:
