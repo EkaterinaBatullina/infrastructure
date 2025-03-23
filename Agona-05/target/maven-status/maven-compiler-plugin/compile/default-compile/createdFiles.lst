@@ -1,5 +1,0 @@
-org/example/Main.class
-org/example/service/SecondBean.class
-org/example/processor/BeanLoggerPostProcessor.class
-org/example/config/ApplicationConfig.class
-org/example/service/FirstBean.class
