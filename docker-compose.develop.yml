@@ -38,7 +38,7 @@ services:
       - portainer_data:/data
 
   nginx-proxy-acme:
-    image: jwilder/nginx-proxy-acme
+    image: nginxproxy/acme-companion
     container_name: nginx-proxy-acme
     environment:
       - DEFAULT_HOST=default.local
