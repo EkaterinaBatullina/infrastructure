@@ -1,0 +1,72 @@
+stages:
+  - build
+  - publish-image
+  - deploy
+
+.build:
+  stage: build
+  image: openjdk:21-slim
+  artifacts:
+    expire_in: 1 days
+    paths:
+      - main/build/libs
+  script:
+    - apt-get update && apt-get install -y maven
+    - mvn clean install -DskipTests --no-transfer-progress
+
+build-develop:
+  environment: develop
+  extends: .build
+  only:
+    - develop
+
+build-main:
+  environment: main
+  extends: .build
+  only:
+    - main
+
+publish-image:
+  stage: publish-image
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ '' ]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "gitlab-ci-token" "${CI_JOB_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --cache=true
+      --context "."
+      --dockerfile "Dockerfile"
+      --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+  only:
+    - develop
+    - main
+
+.deploy:
+  image: docker:19.03.8-dind
+  stage: deploy
+  script:
+    - chmod +x ./deploy.sh
+    - ./deploy.sh
+
+deploy-develop:
+  environment: develop
+  extends: .deploy
+  variables:
+    BRANCH: develop
+    SSH: develop
+    TAG: develop
+  only:
+    - develop
+
+deploy-main:
+  environment: main
+  extends: .deploy
+  variables:
+    BRANCH: main
+    SSH: main
+    TAG: main
+  only:
+    - main
