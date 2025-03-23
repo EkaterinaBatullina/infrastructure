@@ -40,7 +40,7 @@ publish-image:
       --cache=true
       --context "Agona-05"
       --dockerfile "Dockerfile"
-      --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
+      --destination $CI_REGISTRY_IMAGE/agona-05:$CI_COMMIT_BRANCH
   only:
     - develop
     - main
