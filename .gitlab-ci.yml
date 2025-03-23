@@ -1,5 +1,4 @@
 stages:
-  - .pre
   - build
   - publish-image
   - deploy
@@ -10,7 +9,7 @@ stages:
   artifacts:
     expire_in: 1 days
     paths:
-      - target/*.jar
+      - main/build/libs
   script:
     - apt-get update && apt-get install -y maven
     - mvn clean install -DskipTests --no-transfer-progress
@@ -27,83 +26,20 @@ build-main:
   only:
     - main
 
-#publish-image:
-#  stage: publish-image
-#  image:
-#    name: gcr.io/kaniko-project/executor:debug
-#    entrypoint: [ '' ]
-#  script:
-#    - mkdir -p /kaniko/.docker
-#    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "gitlab-ci-token" "${CI_JOB_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
-#    - >-
-#      /kaniko/executor
-#      --cache=true
-#      --context "."
-#      --dockerfile "Dockerfile"
-#      --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
-#  only:
-#    - develop
-#    - main
-
-build-kaniko-image:
-  stage: .pre
-  image: docker:latest
-  services:
-    - docker:dind
-  before_script:
-    - docker info
-    - docker login -u gitlab-ci-token -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -f Dockerfile -t $CI_REGISTRY_IMAGE/kaniko-with-git .
-    - docker push $CI_REGISTRY_IMAGE/kaniko-with-git
-
 publish-image:
   stage: publish-image
   image:
-    name: $CI_REGISTRY_IMAGE/kaniko-with-git
+    name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ '' ]
-  before_script:
-    - echo "Создание директории .ssh для root"
-    - mkdir -p /root/.ssh
-    - printf "%s" "$SSH_PRIVATE_KEY" > /root/.ssh/id_rsa_vm
-    - chmod 600 /root/.ssh/id_rsa_vm
-    - echo "Проверка прав доступа к ключу..."
-    - ls -l /root/.ssh/id_rsa_vm
-    - echo "Проверка содержимого ключа"
-    - cat /root/.ssh/id_rsa_vm
-    - echo "Проверка загрузки ключа..."
-    - ssh-keygen -y -f /root/.ssh/id_rsa_vm
-    - ssh-keyscan gitlab.com >> /root/.ssh/known_hosts
-    - echo "Проверка SSH-подключения..."
-    - ssh -T -i /root/.ssh/id_rsa_vm git@gitlab.com
   script:
-    - apk update && apk add git maven
-    - GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa_vm' git clone -b develop git@gitlab.com:EkaterinaBatullina/batullina-agona-2024.git
-    - ls -l batullina-agona-2024
-    - cd batullina-agona-2024/Agona-05
-    - mvn clean install
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "gitlab-ci-token" "${CI_JOB_TOKEN}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
-    - echo "Содержимое директории перед сборкой:"
-    - ls -l
-    - echo "Содержимое директории таргет перед сборкой:"
-    - ls -l target
-    - echo "Содержимое конфигурации Kaniko:"
-    - cat /kaniko/.docker/config.json
     - >-
       /kaniko/executor
       --cache=true
-      --context .  
-      --dockerfile Dockerfile
+      --context "."
+      --dockerfile "Dockerfile"
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
-    - mkdir -p ./app
-    - cp target/Agona-05-1.0-SNAPSHOT.jar ./app/
-    - echo "Содержимое папки app после копирования:"
-    - ls -l ./app
-  artifacts:
-    paths:
-      - batullina-agona-2024/Agona-05/app
   only:
     - develop
     - main
@@ -111,12 +47,7 @@ publish-image:
 .deploy:
   image: docker:19.03.8-dind
   stage: deploy
-  dependencies:
-    - publish-image
-    - build-develop
   script:
-    - echo "Содержимое директории апп перед сборкой:"
-    - ls -l batullina-agona-2024/Agona-05/app
     - chmod +x ./deploy.sh
     - ./deploy.sh
 
