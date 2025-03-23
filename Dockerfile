@@ -1,6 +1,8 @@
-#FROM gcr.io/kaniko-project/executor:debug AS kaniko
-#FROM alpine/git
-#
-#COPY --from=kaniko /kaniko/executor /kaniko/executor
-#
-#ENTRYPOINT ["/kaniko/executor"]
+# Используем образ OpenJDK для работы с Java
+FROM openjdk:21-slim
+
+WORKDIR /app
+
+COPY target/*.jar app.jar
+
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
