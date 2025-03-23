@@ -49,7 +49,7 @@ services:
       - ./certs:/etc/letsencrypt
     ports:
       - "80:80"
-      - "443:443"
+      - "444:443"
 
   agona-app:
     image: registry.gitlab.com/ekaterinabatullina/infrastructure2/agona-05:main
