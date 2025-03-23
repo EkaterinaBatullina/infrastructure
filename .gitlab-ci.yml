@@ -9,9 +9,10 @@ stages:
   artifacts:
     expire_in: 1 days
     paths:
-      - main/build/libs
+      - Agona-05/target/*.jar
   script:
     - apt-get update && apt-get install -y maven
+    - cd Agona-05
     - mvn clean install -DskipTests --no-transfer-progress
 
 build-develop:
@@ -37,7 +38,7 @@ publish-image:
     - >-
       /kaniko/executor
       --cache=true
-      --context "."
+      --context "Agona-05"
       --dockerfile "Dockerfile"
       --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_BRANCH
   only:
