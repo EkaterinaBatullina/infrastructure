@@ -10,7 +10,7 @@ services:
       - VIRTUAL_PORT=80
       - ENABLE_IPV6=false
     ports:
-      - "80:80"
+      - "8080:80"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
@@ -48,7 +48,7 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - ./certs:/etc/letsencrypt
     ports:
-      - "80:80"
+      - "8081:80"
       - "444:443"
 
   agona-app:
