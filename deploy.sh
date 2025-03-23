@@ -23,7 +23,7 @@ ssh "$SSH" "sudo rm -r ~/infrastructure2/ || echo 0"
 
 ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm' git clone git@gitlab.com:EkaterinaBatullina/infrastructure2.git"
 
-м
+#ssh "$SSH" "cd ~/infrastructure2/ && git checkout $BRANCH"
 
 ssh "$SSH" "sudo docker login -u gitlab-ci-token -p glpat-8QYBRfe7gSiqMesP9fee $CI_REGISTRY"
 
