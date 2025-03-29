@@ -1,11 +1,11 @@
 Host develop
-    HostName 51.250.108.245
+    HostName 158.160.77.57
     User eka_rina16
     Port 22
     StrictHostKeyChecking no
 
 Host master
-    HostName 51.250.108.245
+    HostName 158.160.77.57
     User eka_rina16
     Port 22
     StrictHostKeyChecking no
