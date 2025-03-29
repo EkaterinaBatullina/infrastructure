@@ -21,7 +21,7 @@ ssh -o "StrictHostKeyChecking=no" $SSH
 
 ssh "$SSH" "sudo rm -r ~/infrastructure2/ || echo 0"
 
-ssh "$SSH" "git clone git@gitlab.com:EkaterinaBatullina/infrastructure2.git"
+ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm_new' git clone git@gitlab.com:EkaterinaBatullina/infrastructure2.git"
 
 ssh "$SSH" "cd ~/infrastructure2/ && git checkout $BRANCH"
 
