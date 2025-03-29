@@ -52,7 +52,7 @@ services:
   agona-app:
     image: registry.gitlab.com/ekaterinabatullina/infrastructure2/agona-05:develop
     container_name: agona-05
-    restart: always
+    restart: on-failure
     environment:
       - VIRTUAL_HOST=develop.example.com
       - VIRTUAL_PORT=8080
