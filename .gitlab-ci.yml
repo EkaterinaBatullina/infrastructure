@@ -12,8 +12,9 @@ stages:
       - user-service/user-service-impl/target/*.jar
   script:
     - apt-get update && apt-get install -y maven
-    - cd user-service/user-service-impl
-    - mvn clean install -DskipTests --no-transfer-progress
+    - cd user-service
+    - mvn clean install -DskipTests --no-transfer-progress -pl user-service-api,user-service-db,user-service-impl
+    - cd user-service-impl
 
 build-develop:
   environment: develop
