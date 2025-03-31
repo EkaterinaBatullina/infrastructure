@@ -50,7 +50,7 @@ services:
       - "444:443"
 
   agona-app:
-    image: registry.gitlab.com/ekaterinabatullina/infrastructure2/user-service-impl:main
+    image: registry.gitlab.com/ekaterinabatullina/infrastructure2/user-service/user-service-impl:main
     container_name: user-service-impl
     restart: always
     environment:
