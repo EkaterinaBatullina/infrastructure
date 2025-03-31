@@ -5,14 +5,14 @@ stages:
 
 .build:
   stage: build
-  image: openjdk:21-slim
+  image: openjdk:17-slim
   artifacts:
     expire_in: 1 days
     paths:
-      - Agona-05/target/*.jar
+      - user-service-impl/target/*.jar
   script:
     - apt-get update && apt-get install -y maven
-    - cd Agona-05
+    - cd user-service-impl
     - mvn clean install -DskipTests --no-transfer-progress
 
 build-develop:
@@ -38,9 +38,9 @@ publish-image:
     - >-
       /kaniko/executor
       --cache=true
-      --context "Agona-05"
+      --context "user-service-impl"
       --dockerfile "Dockerfile"
-      --destination $CI_REGISTRY_IMAGE/agona-05:$CI_COMMIT_BRANCH
+      --destination $CI_REGISTRY_IMAGE/user-service-impl:$CI_COMMIT_BRANCH
   only:
     - develop
     - main

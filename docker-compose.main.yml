@@ -50,8 +50,8 @@ services:
       - "444:443"
 
   agona-app:
-    image: registry.gitlab.com/ekaterinabatullina/infrastructure2/agona-05:main
-    container_name: agona-05
+    image: registry.gitlab.com/ekaterinabatullina/infrastructure2/user-service-impl:main
+    container_name: user-service-impl
     restart: always
     environment:
       - VIRTUAL_HOST=main.example.com
