@@ -2,7 +2,6 @@ package org.example.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +30,11 @@ public class DataBaseConfig {
     @Bean
     public HikariConfig hikariConfig() {
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(environment.getProperty("db.url"));
-        hikariConfig.setMaximumPoolSize(Integer.parseInt(environment.getProperty("db.hikari.max-pool-size")));
-        hikariConfig.setUsername(environment.getProperty("db.username"));
-        hikariConfig.setPassword(environment.getProperty("db.password"));
-        hikariConfig.setDriverClassName(environment.getProperty("db.driver.classname")) ;
+        hikariConfig.setJdbcUrl(environment.getProperty("spring.datasource.url"));
+        hikariConfig.setMaximumPoolSize(Integer.parseInt(environment.getProperty("spring.datasource.hikari.maximum-pool-size")));
+        hikariConfig.setUsername(environment.getProperty("spring.datasource.username"));
+        hikariConfig.setPassword(environment.getProperty("spring.datasource.password"));
+        hikariConfig.setDriverClassName(environment.getProperty("spring.datasource.driver-class-name"));
         return hikariConfig;
     }
 
@@ -61,5 +60,4 @@ public class DataBaseConfig {
         liquibase.setDataSource(dataSource());
         return liquibase;
     }
-
 }
