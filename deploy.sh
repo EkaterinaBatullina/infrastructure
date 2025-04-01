@@ -9,7 +9,7 @@ mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 cp config ~/.ssh
 
-ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
+#ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
 
 echo "Список загруженных SSH-ключей:"
 ssh-add -L

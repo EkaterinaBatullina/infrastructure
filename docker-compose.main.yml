@@ -52,12 +52,38 @@ services:
   agona-app:
     image: registry.gitlab.com/ekaterinabatullina/infrastructure2/user-service/user-service-impl:main
     container_name: user-service-impl
-    restart: always
+    restart: on-failure
     environment:
       - VIRTUAL_HOST=main.example.com
       - VIRTUAL_PORT=8080
+      - DB_HOST=postgres_db
+      - DB_PORT=5432
+      - DB_USER=Ekaterina
+      - DB_PASSWORD=eka_rina16
+      - DB_NAME=agona_db
     ports:
       - "8082:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: Ekaterina
+      POSTGRES_PASSWORD: eka_rina16
+      POSTGRES_DB: agona_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
 
 volumes:
   portainer_data:
+  postgres_data:
+
+networks:
+  app_network:
+    driver: bridge
