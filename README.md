@@ -51,6 +51,6 @@ Pipeline реализует полный цикл доставки:
 # Основные компоненты
 
 -  **gitlab-ci.yml** - описание pipeline
--  **nginx.conf** - API Gateway и балансировка
+-  **nginx.conf** - Reverse Proxy, SSL termination, базовый API Gateway
 -  **docker-compose.main.yml** - оркестрация сервисов
 -  **deploy.sh** - автоматизация деплоя
