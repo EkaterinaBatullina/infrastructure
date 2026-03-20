@@ -25,7 +25,7 @@ ssh "$SSH" "GIT_SSH_COMMAND='ssh -i /home/eka_rina16/.ssh/id_rsa_vm_new' git clo
 
 ssh "$SSH" "cd ~/infrastructure2/ && git checkout $BRANCH"
 
-ssh "$SSH" "sudo docker login -u gitlab-ci-token -p glpat-8QYBRfe7gSiqMesP9fee $CI_REGISTRY"
+ssh "$SSH" "sudo docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
 
 ssh "$SSH" "sudo docker pull registry.gitlab.com/ekaterinabatullina/infrastructure2/user-service/user-service-impl:$TAG"
 
