@@ -1,4 +1,4 @@
-# Infrastructure & Deployment (LeetCode Clone)
+# Infrastructure & Deployment (LeetCode Clone) (2025 г.)
 
 Репозиторий содержит конфигурацию инфраструктуры, CI/CD пайплайнов и сценарии развертывания микросервисной системы в облачной среде.
 
